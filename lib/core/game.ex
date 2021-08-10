@@ -12,7 +12,7 @@ defmodule Voter.Core.Game do
     }
   end
 
-  def add_player(game, player) do
+  def add_player(player, game) do
     %{game | players: [player | game.players] }
   end
 
@@ -30,7 +30,7 @@ defmodule Voter.Core.Game do
     %{game | active: false}
   end
 
-  def insert_vote(game, vote) do
+  def add_vote(vote, game) do
     %{game | votes: [vote | game.votes]}
   end
 
