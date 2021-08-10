@@ -1,9 +1,9 @@
-defmodule Votacion.MixProject do
+defmodule Voter.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :votacion,
+      app: :voter,
       version: "0.1.0",
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
@@ -15,7 +15,7 @@ defmodule Votacion.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {Votacion.Application, []}
+      mod: {Voter.Application, []}
     ]
   end
 
