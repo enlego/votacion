@@ -16,10 +16,9 @@ defmodule Voter.Core.Game do
     |> select_winner()
     |> close()
   end
-
-  def close(game) do
-    %{game | active: false}
-  end
+  
+  def activate(game), do: %{game | active: true}
+  def close(game), do: %{game | active: false}
 
   def add_vote(game, vote) do
     %{game | votes: [vote | game.votes]}
