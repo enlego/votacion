@@ -6,7 +6,7 @@ defmodule Voter.Core.Vote do
   def update_email(vote, email) do
      %{vote | email: email}
   end
- 
+
   def update_player(vote, player) do
     %{vote | player: player}
   end
