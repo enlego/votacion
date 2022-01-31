@@ -1,5 +1,8 @@
 defmodule Voter.Boundary.GameServer do
- alias Voter.Core.Game
+	use GenServer
+  alias Voter.Core.Game
+	alias Voter.Core.Player
+	alias Voter.Core.Vote
 
 # Callbacks
 	@impl true
@@ -28,37 +31,37 @@ defmodule Voter.Boundary.GameServer do
 
 		@impl GenServer
 	  def handle_call({:activate},_from, game) do
-     new_game = activate(game)
+     new_game = Game.activate(game)
 		 status = new_game.active
      {:reply,status,new_game}
     end
-		
+
 		@impl GenServer
 	  def handle_call({:close},_from, game) do
-     new_game = close(game)
+     new_game = Game.close(game)
 		 status = new_game.active
      {:reply,status,new_game}
     end
 
 
-# Función de API	
+# Función de API
 	  def start do
 		 GenServer.start(GameServer, nil)
 	  end
 
 	  def add_player(game_server, name) do
 		 player = Player.new() |> Player.name(name)
-		 GameServer.call(game_server,{:add_player,player})
+		 GenServer.call(game_server,{:add_player,player})
 	  end
-	
+
 	  def add_vote(game_server,email,name) do
 			player = Player.new() |> Player.name(name)
-			vote = Vote.new() 
+			vote = Vote.new()
 						|> Vote.update_email(email)
 						|> Vote.update_player(player)
-			Gamesever.call(game_server,{:add_vote,vote})
+			Genserver.call(game_server,{:add_vote,vote})
 	  end
-	
+
 	  def view_game(game_server) do
 		 GenServer.call(game_server,{:view})
 	  end
@@ -66,11 +69,11 @@ defmodule Voter.Boundary.GameServer do
 	  def select_winner() do
 	  end
 
-	  def activate() do
+	  def activate(game_server) do
 		 GenServer.call(game_server,{:activate})
 	  end
-	
-	  def close() do
+
+	  def close(game_server) do
 			GenServer.call(game_server,{:close})
 	  end
 
