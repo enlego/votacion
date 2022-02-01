@@ -1,5 +1,5 @@
 defmodule Voter.Core.Player do
-  defstruct name
+  defstruct [:name]
 
   def new(name) do
     player = new() |> name(name)

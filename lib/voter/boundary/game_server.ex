@@ -23,11 +23,11 @@ defmodule Voter.GameServer do
     GenServer.call(game_server, {:winner})
   end
 
-  def activate() do
+  def activate(game_server) do
     GenServer.call(game_server, {:activate})
   end
 
-  def close() do
+  def close(game_server) do
     GenServer.call(game_server, {:close})
   end
  
